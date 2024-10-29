@@ -55,7 +55,9 @@ header {
     height: 80px; /* Tamaño más grande para el logo */
 }
 .imagen-pequena {
-    width: 50%; /* Ajusta este valor para hacer la imagen más pequeña, como un porcentaje del ancho del contenedor */
+    float: right;            /* Posiciona la imagen a la derecha */
+    margin: 0 0 10px 10px;   /* Agrega espacio alrededor de la imagen */
+    width: 30%; /* Ajusta este valor para hacer la imagen más pequeña, como un porcentaje del ancho del contenedor */
     height: auto; /* Mantiene la proporción */
 }
 .imagen-derecha {
