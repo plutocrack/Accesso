@@ -1,5 +1,6 @@
-document.addEventListener("DOMContentLoaded", function () {
+  document.addEventListener("DOMContentLoaded", function () {
     const enlaces = document.querySelectorAll(".enlace-menu"); // Selecciona los enlaces del menú
+    const contenidoCentral = document.getElementById("contenido-central");
 
     enlaces.forEach(enlace => {
         enlace.addEventListener("click", function (event) {
@@ -15,17 +16,15 @@ document.addEventListener("DOMContentLoaded", function () {
                     return response.text(); // Convierte la respuesta en texto
                 })
                 .then(data => {
-                    const contenidoCentral = document.getElementById("contenido-central");
-                    
-                    // Inserta el nuevo contenido
+                    // Inserta el nuevo contenido en el contenedor central
                     contenidoCentral.innerHTML = data;
 
                     // Enfoca el contenedor para que el lector de pantalla lo lea
                     contenidoCentral.setAttribute("tabindex", "-1"); // Asegura que se pueda enfocar
                     contenidoCentral.focus();
 
-                    // Actualiza el historial sin modificar la URL visible
-                    history.pushState({ page: url }, "", "#"); 
+                    // Guarda el estado en el historial sin cambiar la URL visible
+                    history.pushState({ page: url }, "", "index.html");
                 })
                 .catch(error => {
                     console.error("Error al cargar el contenido:", error);
@@ -34,11 +33,10 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
     
-    // Manejo del retroceso en el historial
+    // Manejo del retroceso y avance en el historial
     window.addEventListener("popstate", function (event) {
-        const contenidoCentral = document.getElementById("contenido-central");
         if (event.state && event.state.page) {
-            // Cargar el contenido específico del historial
+            // Cargar el contenido del estado guardado en el historial
             fetch(event.state.page)
                 .then(response => response.text())
                 .then(data => {
