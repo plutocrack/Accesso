@@ -24,8 +24,8 @@ document.addEventListener("DOMContentLoaded", function () {
                     contenidoCentral.setAttribute("tabindex", "-1"); // Asegura que se pueda enfocar
                     contenidoCentral.focus();
 
-                    // Opcional: Actualiza la URL en la barra de direcciones
-                    history.pushState({ page: url }, "", url);
+                    // Actualiza el historial sin modificar la URL visible
+                    history.pushState({ page: url }, "", "#"); 
                 })
                 .catch(error => {
                     console.error("Error al cargar el contenido:", error);
@@ -36,16 +36,20 @@ document.addEventListener("DOMContentLoaded", function () {
     
     // Manejo del retroceso en el historial
     window.addEventListener("popstate", function (event) {
-        if (event.state) {
+        const contenidoCentral = document.getElementById("contenido-central");
+        if (event.state && event.state.page) {
+            // Cargar el contenido específico del historial
             fetch(event.state.page)
                 .then(response => response.text())
                 .then(data => {
-                    const contenidoCentral = document.getElementById("contenido-central");
                     contenidoCentral.innerHTML = data;
                     contenidoCentral.setAttribute("tabindex", "-1");
                     contenidoCentral.focus();
                 })
                 .catch(error => console.error("Error al cargar el contenido:", error));
+        } else {
+            // Si no hay un estado de historial válido, recarga el contenido inicial
+            contenidoCentral.innerHTML = "<p>Bienvenido a la página principal. Selecciona una opción del menú.</p>";
         }
     });
 });
