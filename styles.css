@@ -54,7 +54,12 @@ header {
 .logo img {
     height: 80px; /* Tamaño más grande para el logo */
 }
-
+.imagen-derecha {
+    float: right;            /* Posiciona la imagen a la derecha */
+    margin: 0 0 10px 10px;   /* Agrega espacio alrededor de la imagen */
+    max-width: 40%;          /* Ajusta el ancho de la imagen dentro de la columna */
+    height: auto;            /* Mantiene la relación de aspecto de la imagen */
+}
 /* Menú moderno y dinámico */
 .modern-menu ul {
     display: flex;
