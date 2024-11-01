@@ -1,0 +1,166 @@
+name: Accessibility Analysis
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '18' # Especifica la versión de Node.js que deseas usar
+
+      - name: Install dependencies
+        run: |
+          npm install playwright @axe-core/playwright axios
+
+      - name: Run accessibility analysis
+        run: |
+          node -e "
+          const { chromium } = require('playwright');
+          const AxeBuilder = require('@axe-core/playwright').default;
+          const fs = require('fs');
+          const path = require('path');
+
+          // Función para obtener las 50 webs más visitadas desde España
+          async function fetchTopWebsites() {
+              // Lista estática de los 50 sitios más visitados en España
+              return [
+                  'https://www.google.com',
+                  'https://www.youtube.com',
+                  'https://www.google.es',
+                  'https://www.facebook.com',
+                  'https://www.marca.com',
+                  'https://www.x.com',
+                  'https://www.instagram.com',
+                  'https://www.whatsapp.com',
+                  'https://www.as.com',
+                  'https://www.amazon.es',
+                  'https://www.elmundo.es',
+                  'https://www.wikipedia.org',
+                  'https://www.sport.es',
+                  'https://www.mundodeportivo.com',
+                  'https://www.elpais.com',
+                  'https://www.playdede.eu',
+                  'https://www.live.com',
+                  'https://www.chatgpt.com',
+                  'https://www.twitch.tv',
+                  'https://www.aemet.es',
+                  'https://www.idealista.com',
+                  'https://www.20minutos.es',
+                  'https://www.okdiario.com',
+                  'https://www.eltiempo.es',
+                  'https://www.netflix.com',
+                  'https://www.xvideos.com',
+                  'https://www.bing.com',
+                  'https://www.eldebate.com',
+                  'https://www.elconfidencial.com',
+                  'https://www.larazon.es',
+                  'https://www.infobae.com',
+                  'https://www.elespanol.com',
+                  'https://www.lavozdegalicia.es',
+                  'https://www.eldiario.es',
+                  'https://www.yahoo.com',
+                  'https://www.pornhub.com',
+                  'https://www.tiktok.com',
+                  'https://www.abc.es',
+                  'https://www.forocoches.com',
+                  'https://www.linkedin.com',
+                  'https://www.lavanguardia.com',
+                  'https://www.aliexpress.com',
+                  'https://www.elperiodico.com',
+                  'https://www.elnacional.cat',
+                  'https://www.eleconomista.es', 
+                  'http://microsoftonline.com', 
+                  'http://huffingtonpost.es', 
+                  'http://office.microsoft.com', 
+                  'http://cadenaser.com', 
+                  'http://rtve.es'
+              ];
+          }
+
+          async function analyzeAccessibility(url) {
+              const browser = await chromium.launch();
+              const page = await browser.newPage();
+              await page.goto(url);
+
+              const results = await new AxeBuilder({ page }).analyze();
+              
+              await browser.close();
+              return results;
+          }
+
+          function exportToHTML(results) {
+              const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 
+                                  'May', 'Jun', 
+                                  'Jul', 'Aug', 
+                                  'Sep', 'Oct', 
+                                  'Nov', 
+                                  'Dec'];
+              const date = new Date();
+              const fileName = \`\${monthNames[date.getMonth()]} \${date.getFullYear().toString().slice(-2)}.html\`;
+              
+              let htmlContent = \`
+              <html>
+                <head>
+                    <title>Resultados de Accesibilidad</title>
+                    <style>
+                        table { width: 100%; border-collapse: collapse; }
+                        th, td { border: 1px solid black; padding: 8px; text-align: left; }
+                        th { background-color: #f2f2f2; }
+                    </style>
+                </head>
+                <body>
+                    <h1>Resultados de Accesibilidad - \${fileName}</h1>
+                    <table>
+                        <tr>
+                            <th>URL</th>
+                            <th>Violaciones</th>
+                            <th>Detalles</th>
+                            <th>Pasos</th>
+                        </tr>\`;
+          
+              results.forEach(result => {
+                htmlContent += \`
+                    <tr>
+                        <td>\${result.url}</td>
+                        <td>\${result.violations.length}</td>
+                        <td>\${result.violations.map(v => v.description).join('<br>')}</td>
+                        <td>\${result.violations.map(v => v.help).join('<br>')}</td>
+                    </tr>\`;
+              });
+
+              htmlContent += \`
+                    </table>
+                </body>
+            </html>\`;
+
+            fs.writeFileSync(path.join(__dirname, fileName), htmlContent);
+        }
+
+        async function main() {
+            const websites = await fetchTopWebsites();
+            const accessibilityResults = [];
+
+            for (const website of websites) {
+                const result = await analyzeAccessibility(website);
+                accessibilityResults.push({
+                    url: website,
+                    violations: result.violations,
+                    timeStamp: new Date().toISOString()
+                });
+            }
+
+            exportToHTML(accessibilityResults);
+        }
+
+        main().catch(console.error);
+        "
