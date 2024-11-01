@@ -30,9 +30,7 @@ jobs:
           const fs = require('fs');
           const path = require('path');
 
-          // Función para obtener las 50 webs más visitadas desde España
           async function fetchTopWebsites() {
-              // Lista estática de los 50 sitios más visitados en España
               return [
                   'https://www.google.com',
                   'https://www.youtube.com',
@@ -91,9 +89,7 @@ jobs:
               const browser = await chromium.launch();
               const page = await browser.newPage();
               await page.goto(url);
-
               const results = await new AxeBuilder({ page }).analyze();
-              
               await browser.close();
               return results;
           }
@@ -166,4 +162,4 @@ jobs:
         }
 
         main().catch(console.error);
-        
+        "
