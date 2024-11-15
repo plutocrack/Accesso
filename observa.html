@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Página web moderna y dinámica, accesible y adaptativa.">
+    <title>Accesibilizando la infomación</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Cabecera accesible y responsiva -->
+    <header>
+        <div class="header-content">
+            <div class="header-images left-images">
+                <img src="imagen1.gif" alt="Imagen decorativa izquierda 1">
+                <img src="imagen2.gif" alt="Imagen decorativa izquierda 2">
+            </div>
+            <div class="logo">
+                <img src="logo.gif" alt="Logotipo de la página">
+            </div>
+            <div class="header-images right-images">
+	         <img src="imagen3.gif" alt="Imagen decorativa derecha 1">
+                 <img src="imagen4.gif" alt="Imagen decorativa derecha 2">
+       
+            </div>
+        </div>
+
+        <!-- Menú moderno y dinámico -->
+        <nav aria-label="Menú principal" class="modern-menu">
+            <ul>
+                <li><a href="index.html">Inicio</a></li>
+                <li><a href="ayudastec.html">Ayudas Técnicas</a></li>
+                <li><a href="observat.html">Observatorio</a></li>
+                <li><a href="novedades.html">Novedades</a></li>
+		<li><a href="aula.html">Aula</a></li>
+		<li><a href="soporte.html">Soporte</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Sección principal con dos columnas -->
+    <main>
+        <div class="content-columns">
+
+            <div id="contenido-central" aria-live="polite">
+                <h1>Observatorio de accesibilizando</h1>
+                <p>Desde este espacio, el Observatorio, queremos mostrar la accesibilidad a nivel mundial, realizando análisis de accesibilidad automatizados que reflejarán el interés y la preocupación de empresas e instituciones en generar mundos digitales accesibles, que faciliten la vida y desarrollo de las personas. </p>			
+	    </div>
+
+            <!-- Menú de opciones dinámico en columna derecha -->
+            <aside class="side-menu">
+                <h2>Zonas del Mundo.</h2>
+                <ul>
+                    <li><a href="europa.html" data-url="europa.html" class="enlace-menu">Europa</a></li>
+                    <li><a href="usa.html" data-url="usa.html" class="enlace-menu">Estados Unidos</a></li>
+                    <li><a href="latam.html" data-url="latam.html" class="enlace-menu">América Latina</a></li>
+                    <li><a href="africa.html" data-url="africa.html" class="enlace-menu">Africa</a></li>
+                    <li><a href="asia.html" data-url="asia.html" class="enlace-menu">Asia</a></li>
+                     <li><a href="oceania.html" data-url="oceania.html" class="enlace-menu">Oceanía</a></li>
+                </ul>
+            </aside>
+
+        </div>
+
+         </main>
+
+    <!-- Pie de página -->
+    <footer>
+        &copy; 2023 @ccesibiliz@ndo. Todos los derechos reservados.
+    </footer>
+<script src="script.js"></script>
+</body>
+</html>
