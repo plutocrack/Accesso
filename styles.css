@@ -20,62 +20,61 @@ header {
     padding: 15px 0;
     text-align: center;
 }
-
 /* Estilos generales para todos los encabezados */
 h1, h2, h3, h4, h5, h6 {
-    font-family: 'Roboto', sans-serif;
-    color: #333;
-    line-height: 1.2;
-    margin-bottom: 0.5em;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
+  line-height: 1.2;
+  margin-bottom: 0.5em;
 }
 
 /* Estilos específicos para cada nivel de encabezado */
 h1 {
-    font-size: 1.75rem;
-    font-weight: 700;
-    letter-spacing: -0.5px;
-    border-bottom: 2px solid #3498db;
-    padding-bottom: 0.3em;
+  font-size: 1.75rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 0.3em;
 }
 
 h2 {
-    font-size: 1.50rem;
-    font-weight: 600;
-    margin-bottom: 15px;
+  font-size: 1.50rem;
+  font-weight: 600;
+ /* color: #2c3e50; */
+  margin-bottom: 15px; /* Ajusta el valor para obtener más o menos espacio */
 }
 
 h3 {
-    font-size: 1.25rem;
-    font-weight: 500;
-    color: #34495e;
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: #34495e;
 }
 
 h4 {
-    font-size: 1rem;
-    font-weight: 500;
-    color: #7f8c8d;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #7f8c8d;
 }
 
 h5 {
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: #95a5a6;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #95a5a6;
 }
 
 h6 {
-    font-size: 0.8rem;
-    font-weight: 500;
-    color: #bdc3c7;
-    text-transform: uppercase;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #bdc3c7;
+  text-transform: uppercase;
 }
-
-p {
-    text-align: justify;
-    text-indent: 20px;
-    line-height: 1.6;
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
+ p {
+        text-align: justify;       /* Justifica el texto para ajustar a ambos márgenes */
+        text-indent: 20px;         /* Sangría de la primera línea de cada párrafo */
+        line-height: 1.6;          /* Aumenta el interlineado para mayor separación */
+        margin-top: 20px;       /* Espacio entre párrafos */
+        margin-bottom: 20px;
+    }
 
 .header-content {
     display: flex;
@@ -84,7 +83,6 @@ p {
     width: 100%;
     max-width: 1200px;
     padding: 0 20px;
-    margin: 0 auto;
 }
 
 .header-images {
@@ -93,29 +91,25 @@ p {
 }
 
 .left-images img, .right-images img {
-    height: 80px;
-    width: auto;
+    height: 80px; /* Tamaño intermedio para las imágenes decorativas */
+    flex-grow: 1; /* Distribución uniforme */
 }
 
 .logo img {
-    height: 80px;
-    width: auto;
+    height: 80px; /* Tamaño más grande para el logo */
 }
-
 .imagen-pequena {
-    float: right;
-    margin: 0 0 10px 10px;
-    width: 30%;
-    height: auto;
+    float: right;            /* Posiciona la imagen a la derecha */
+    margin: 0 0 10px 10px;   /* Agrega espacio alrededor de la imagen */
+    width: 30%; /* Ajusta este valor para hacer la imagen más pequeña, como un porcentaje del ancho del contenedor */
+    height: auto; /* Mantiene la proporción */
 }
-
 .imagen-derecha {
-    float: right;
-    margin: 0 0 10px 10px;
-    max-width: 40%;
-    height: auto;
+    float: right;            /* Posiciona la imagen a la derecha */
+    margin: 0 0 10px 10px;   /* Agrega espacio alrededor de la imagen */
+    max-width: 40%;          /* Ajusta el ancho de la imagen dentro de la columna */
+    height: auto;            /* Mantiene la relación de aspecto de la imagen */
 }
-
 /* Menú moderno y dinámico */
 .modern-menu ul {
     display: flex;
@@ -163,7 +157,7 @@ p {
 .side-menu h2 {
     font-size: 20px;
     margin-bottom: 10px;
-    color: #FFFFFF;
+    color: #ffffFF; /* Blanco */
 }
 
 .side-menu ul {
@@ -190,88 +184,4 @@ footer {
     text-align: center;
     padding: 10px 20px;
     color: #fff;
-}
-
-/* Media queries para dispositivos móviles */
-@media screen and (max-width: 768px) {
-    .header-content {
-        flex-direction: column;
-    }
-
-    .left-images, .right-images {
-        display: none;
-    }
-
-    .logo img {
-        height: 60px;
-    }
-
-    .modern-menu ul {
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .modern-menu ul li {
-        margin: 5px 0;
-    }
-
-    .content-columns {
-        flex-direction: column;
-    }
-
-    .main-content, .side-menu {
-        flex: 1 1 100%;
-    }
-
-    .side-menu {
-        margin-left: 0;
-        margin-top: 20px;
-    }
-
-    .imagen-pequena, .imagen-derecha {
-        float: none;
-        margin: 10px auto;
-        max-width: 100%;
-        display: block;
-    }
-}
-
-/* Media queries para tabletas */
-@media screen and (min-width: 769px) and (max-width: 1024px) {
-    .header-images img {
-        height: 60px;
-    }
-
-    .logo img {
-        height: 70px;
-    }
-
-    .content-columns {
-        flex-direction: column;
-    }
-
-    .main-content, .side-menu {
-        flex: 1 1 100%;
-    }
-
-    .side-menu {
-        margin-left: 0;
-        margin-top: 20px;
-    }
-}
-
-/* Ajustes para pantallas más grandes */
-@media screen and (min-width: 1025px) {
-    .content-columns {
-        flex-direction: row;
-    }
-
-    .main-content {
-        flex: 0 0 65%;
-    }
-
-    .side-menu {
-        flex: 0 0 30%;
-        margin-left: 5%;
-    }
 }
